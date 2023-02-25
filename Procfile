@@ -1,1 +1,1 @@
-web: gunicorn TICKETWEB.wsgi –log-file -
+web: gunicorn TicketWeb.wsgi –log-file -
