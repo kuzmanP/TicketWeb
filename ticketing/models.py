@@ -5,7 +5,7 @@ import uuid
 
 #Seat Model
 class Seat(models.Model):
-    row = models.CharField(max_length=10)
+    row = models.CharField(max_length=100000)
     number = models.IntegerField()
     available = models.BooleanField(default=True)
 
