@@ -56,7 +56,6 @@ TicketType={"Regular","VIP","VVIP"}
 class Ticket(models.Model):
     ticket_id= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     ticket_type=models.CharField(choices=TicketType, default="Regular")
-    ticket_code= models.CharField(default=pyqrcode.create(content))
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
     event_name=models.ForeignKey(Event, on_delete=models.CASCADE)
