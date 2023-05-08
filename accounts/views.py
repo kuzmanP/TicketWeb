@@ -51,9 +51,9 @@ def signUp(request):
                 user.save()
                 
                 #Email welcome
-                subject = 'Welcome to FileOcean Cloud Storage '
+                subject = 'Welcome to TicketWeb Platform '
                
-                message = 'Hello' + user.username + '!!' + 'Welcome to FileOcean Cloud Storage, Thank you for visiting our website, we have sent you a confirmation email, Kindly confirm to activate your account, Thank You, The Rift Team'
+                message = 'Hello' + user.username + '!!' + 'Welcome to TicketWeb Platform, Thank you for visiting our website, we have sent you a confirmation email, Kindly confirm to activate your account, Thank You, The Rift Team'
                
                 from_email = settings.EMAIL_HOST_USER
                
