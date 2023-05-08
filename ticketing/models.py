@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
-import pyqrcode
 # Create your models here.
 class EventManager(models.Model):
     manager_id = models.UUIDField(primary_key=True,  default=uuid.uuid4, editable=False)
