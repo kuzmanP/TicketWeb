@@ -33,12 +33,18 @@ class Seat(models.Model):
 
     def __str__(self):
         return f"{self.row} - {self.number}"
-PaymentType={"Cash","MOMO","Cheque"} 
+    
+    
+PaymentTypeCHOICES = [
+    ("C", "Cash"),
+    ("M", "MOMO"),
+    ("CQ", "CHEQUE")
+]
 class Transaction(models.Model):
     transaction_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    payment_type=models.CharField(choices=PaymentType)
-    amount = models.DecimalField(default=0.00)
+    payment_type=models.CharField(choices=PaymentTypeCHOICES, max_length=100)
+    amount = models.DecimalField(decimal_places=2, max_digits=10000, default=0.00)
     transaction_date=models.DateField(auto_now_add=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     
@@ -51,14 +57,17 @@ class Transaction(models.Model):
 
 
 
-
-TicketType={"Regular","VIP","VVIP"} 
+TicketTypeCHOICES = [
+    ("Rg", "Regular"),
+    ("V", "VIP"),
+    ("VV", "VVIP")
+]
 class Ticket(models.Model):
     ticket_id= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    ticket_type=models.CharField(choices=TicketType, default="Regular")
+    ticket_type=models.CharField(choices=TicketTypeCHOICES,max_length=1000, default="Regular")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
-    event_name=models.ForeignKey(Event, on_delete=models.CASCADE)
+    event_name=models.ForeignKey(Event, on_delete=models.CASCADE, default="Piloting Event")
     purchased_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
