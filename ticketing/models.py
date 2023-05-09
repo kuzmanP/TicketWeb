@@ -1,50 +1,76 @@
+
 from django.db import models
+from django.contrib.auth.models import User
 import uuid
-
-
-class Seat(models.Model):
-    seat_number = models.CharField(max_length=20)
-    venue = models.CharField(max_length=50)
-    is_available = models.BooleanField(default=True)
-
-    def __str__(self):
-        return f"{self.seat_number} ({self.venue})"
-
-
-class Ticket(models.Model):
-    ticket_id= models.UUIDField(primary_key=True, default=uuid.UUID('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'), editable=False)
-    seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
-    event = models.ForeignKey('Event', on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
-
-    def __str__(self):
-        return f"{self.seat} for {self.event}-{self.ticket_id}"
-
-
-class Event(models.Model):
-    name = models.CharField(max_length=50)
-    start_time = models.DateTimeField(default="null")
-    end_time = models.DateTimeField(auto_now_add=True)
-    location = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
-
+# Create your models here.
 class EventManager(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    phone_number = models.CharField(max_length=20)
-    events = models.ManyToManyField(Event, blank=True)
+    id = models.UUIDField(primary_key=True,  default=uuid.uuid4, editable=False)
+    manager_name=models.CharField(max_length=1000)
+    manager_contact=models.CharField(max_length=10)
+    def __str__(self):
+            return f"{self.id} - {self.manager_name}"
+
+    def __unicode__(self):
+        return 
+    
+class Event(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    event_name=models.CharField(max_length= 1000)
+    event_location = models.CharField(max_length= 1000)
+    event_attendees_number = models.IntegerField()
+    event_manager=models.ForeignKey(EventManager, on_delete=models.CASCADE)
+    time_created=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.id} - {self.event_name} - {self.time_created}"
+
+    def __unicode__(self):
+        return 
+#Seat Model
+class Seat(models.Model):
+    row = models.CharField(max_length=100000)
+    number = models.IntegerField()
+    available = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
-
-
+        return f"{self.row} - {self.number}"
+    
+    
+PaymentTypeCHOICES = [
+    ("C", "Cash"),
+    ("M", "MOMO"),
+    ("CQ", "CHEQUE")
+]
 class Transaction(models.Model):
-    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
-    amount_paid = models.DecimalField(max_digits=8, decimal_places=2)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount_paid=models.CharField(max_length=100, default="0.00")
+    transaction_date=models.DateField(auto_now_add=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    
 
     def __str__(self):
-        return f"{self.ticket} paid {self.amount_paid} at {self.timestamp}"
+        return f"{self.id} - {self.transaction_date} - {self.event}"
+
+    def __unicode__(self):
+        return 
+
+
+
+TicketTypeCHOICES = [
+    ("Rg", "Regular"),
+    ("V", "VIP"),
+    ("VV", "VVIP")
+]
+class Ticket(models.Model):
+    id= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ticket_type=models.CharField(choices=TicketTypeCHOICES,max_length=1000, default="Regular")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
+    event_name=models.CharField(max_length=1000, default="Piloting Event")
+    purchased_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.seat} - {self.ticket_type} - {self.event_name}"    
+
+
+
