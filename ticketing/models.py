@@ -49,7 +49,7 @@ class Transaction(models.Model):
     
 
     def __str__(self):
-        return 
+        return f"{self.transaction_id} - {self.transaction_date} - {self.event}"
 
     def __unicode__(self):
         return 
