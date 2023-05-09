@@ -23,8 +23,8 @@ class Ticket(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=50)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.DateTimeField(default="null")
+    end_time = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=50)
 
     def __str__(self):
@@ -42,7 +42,6 @@ class EventManager(models.Model):
 
 
 class Transaction(models.Model):
-    ticket_id = models.UUIDField()
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     amount_paid = models.DecimalField(max_digits=8, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
