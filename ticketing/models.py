@@ -12,7 +12,7 @@ class Seat(models.Model):
 
 
 class Ticket(models.Model):
-    id= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ticket_id= models.UUIDField(primary_key=True, default=uuid.UUID('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'), editable=False)
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
     event = models.ForeignKey('Event', on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=8, decimal_places=2)
