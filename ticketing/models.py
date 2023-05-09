@@ -66,7 +66,7 @@ class Ticket(models.Model):
     ticket_type=models.CharField(choices=TicketTypeCHOICES,max_length=1000, default="Regular")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
-    event_name=models.ForeignKey(Event, on_delete=models.CASCADE, default="Piloting Event")
+    event_name=models.ForeignKey(Event, on_delete=models.CASCADE, default="00010203-0405-0607-0809-0a0b0c0d0e0f")
     purchased_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
