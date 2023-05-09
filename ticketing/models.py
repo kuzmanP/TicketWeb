@@ -21,7 +21,7 @@ class Event(models.Model):
     event_manager=models.ForeignKey(EventManager, on_delete=models.CASCADE)
     time_created=models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return f"{self.id} - {self.event_name} - {self.time_created}"
+        return f"{self.event_name} - {self.time_created}"
 
     def __unicode__(self):
         return 
