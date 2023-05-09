@@ -42,8 +42,7 @@ PaymentTypeCHOICES = [
 class Transaction(models.Model):
     transaction_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    payment_type=models.CharField(choices=PaymentTypeCHOICES,max_length=100,default="Regular")
-    amount = models.IntegerField()
+    amount_paid=models.CharField(max_length=100, default="0.00")
     transaction_date=models.DateField(auto_now_add=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     
