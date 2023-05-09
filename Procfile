@@ -1,0 +1,1 @@
+web: gunicorn TICKETWEB.wsgi –log-file -
