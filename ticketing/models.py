@@ -14,7 +14,7 @@ class EventManager(models.Model):
         return 
     
 class Event(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,editable=False)
     event_name=models.CharField(max_length= 1000)
     event_location = models.CharField(max_length= 1000)
     event_attendees_number = models.IntegerField()
@@ -41,7 +41,7 @@ PaymentTypeCHOICES = [
     ("CQ", "CHEQUE")
 ]
 class Transaction(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount_paid=models.CharField(max_length=100, default="0.00")
     transaction_date=models.DateField(auto_now_add=True)
