@@ -11,7 +11,7 @@ class Seat(models.Model):
 
 
 class Ticket(models.Model):
-    ticket_id= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
     event = models.ForeignKey('Event', on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=8, decimal_places=2)
@@ -41,7 +41,7 @@ class EventManager(models.Model):
 
 
 class Transaction(models.Model):
-    transaction_id= models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+    ticket_id = models.UUIDField()
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     amount_paid = models.DecimalField(max_digits=8, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
