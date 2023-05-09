@@ -68,11 +68,7 @@ TicketTypeCHOICES = [
     ("VV", "VVIP")
 ]
 class Ticket(models.Model):
-<<<<<<< HEAD
-    id= models.UUIDField(primary_key=True, default=uuid.uuid4)
-=======
     id= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
->>>>>>> origin/main
     ticket_type=models.CharField(choices=TicketTypeCHOICES,max_length=1000, default="Regular")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
