@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'TicketWeb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ticketwebdb',
+        'NAME': 'ticketdb',
         'USER': 'kuzman',
         'PASSWORD':'rootpass',
         'HOST':'localhost',
