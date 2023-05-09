@@ -1,8 +1,6 @@
 from django.shortcuts import render
 
 # Create your views here.
-<<<<<<< HEAD
-=======
 from django.shortcuts import render,redirect
 from ticketing.models import Seat,Ticket
 import qrcode
@@ -32,4 +30,3 @@ def generate_qr_code(request, ticket_id):
     response = HttpResponse(content_type='image/png')
     img.save(response, 'PNG')
     return response
->>>>>>> origin/main
