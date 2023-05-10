@@ -5,6 +5,10 @@ from django.shortcuts import render,redirect
 from ticketing.models import Seat,Ticket
 import qrcode
 from django.http import HttpResponse
+from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+
 # Create your views here.
 
 def purchase_ticket(request, seat_id):
@@ -16,6 +20,23 @@ def purchase_ticket(request, seat_id):
     seat.available = False
     seat.save()
     return redirect('ticket_detail', ticket_id=ticket.id)
+
+
+
+
+class UserTicketsView(LoginRequiredMixin, View):
+    login_url = '/signin/'
+    redirect_field_name = 'signin'
+
+    def get(self, request):
+        # Get all tickets associated with the logged-in user
+        tickets = Ticket.objects.filter(user=request.user)
+
+        context = {
+            'tickets': tickets
+        }
+        return render(request, 'user_tickets.html', context)
+
 
 
 
