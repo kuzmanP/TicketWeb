@@ -57,9 +57,9 @@ class Transaction(models.Model):
 
 
 TicketTypeCHOICES = [
-    ("Rg", "Regular"),
-    ("V", "VIP"),
-    ("VV", "VVIP")
+    ("Regular", "Regular"),
+    ("VIP", "VIP"),
+    ("VVIP", "VVIP")
 ]
 class Ticket(models.Model):
     id= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
