@@ -35,7 +35,7 @@ class UserTicketsView(LoginRequiredMixin, View):
         context = {
             'tickets': tickets
         }
-        return render(request, 'user_tickets.html', context)
+        return render(request, 'Templates/page.html', context)
 
 
 
