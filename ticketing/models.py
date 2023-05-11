@@ -32,7 +32,7 @@ class Seat(models.Model):
     available = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.row} - {self.number}"
+        return f"{self.row}"
     
     
 PaymentTypeCHOICES = [
