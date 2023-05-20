@@ -2,12 +2,13 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render,redirect
-from ticketing.models import Seat,Ticket
+from ticketing.models import Seat,Ticket,Event
 import qrcode
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -38,7 +39,17 @@ class UserTicketsView(LoginRequiredMixin, View):
         return render(request, 'Templates/page.html', context)
 
 
+class EventListView(LoginRequiredMixin,View):
+    login_url = '/signin/'
+    redirect_field_name = 'signin'
+    
 
+    def get(self,request):
+        events=Event.objects.all()
+        context={
+            'events':events
+        }
+        return render(request, 'Templates/event.html',context)
 
 def generate_qr_code(request, ticket_id):
     # Generate the QR code
