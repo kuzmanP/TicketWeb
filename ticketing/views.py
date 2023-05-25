@@ -26,7 +26,7 @@ def purchase_ticket(request, seat_id):
 
 
 class UserTicketsView(LoginRequiredMixin, View):
-    login_url = '/signin/'
+    login_url = 'accounts/signin/'
     redirect_field_name = 'signin'
 
     def get(self, request):
