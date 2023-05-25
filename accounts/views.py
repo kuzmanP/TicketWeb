@@ -99,7 +99,7 @@ def logIn(request):
         authenticated=True
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('all_events')
         else:
             messages.error(request, 'Invalid Credentials') 
             return redirect('login')   
