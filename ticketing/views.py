@@ -25,6 +25,10 @@ def purchase_ticket(request, seat_id):
 
 
 
+import qrcode
+from django.http import HttpResponse
+from django.template import loader
+
 class UserTicketsView(LoginRequiredMixin, View):
     login_url = 'accounts/signin/'
     redirect_field_name = 'signin'
@@ -33,10 +37,21 @@ class UserTicketsView(LoginRequiredMixin, View):
         # Get all tickets associated with the logged-in user
         tickets = Ticket.objects.filter(user=request.user)
 
+        # Generate QR codes for each ticket
+        qr_codes = []
+        for ticket in tickets:
+            qr = qrcode.QRCode(version=1, box_size=10, border=5)
+            qr.add_data(ticket.id)
+            qr.make(fit=True)
+            img = qr.make_image(fill_color='black', back_color='white')
+            qr_codes.append(img)
+
         context = {
-            'tickets': tickets
+            'tickets': tickets,
+            'qr_codes': qr_codes
         }
         return render(request, 'Templates/page.html', context)
+
 
 
 class EventListView(LoginRequiredMixin,View):
@@ -51,14 +66,3 @@ class EventListView(LoginRequiredMixin,View):
         }
         return render(request, 'Templates/event.html',context)
 
-def generate_qr_code(request, ticket_id):
-    # Generate the QR code
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data(ticket_id)
-    qr.make(fit=True)
-    img = qr.make_image(fill_color='black', back_color='white')
-    
-    # Return the image as an HTTP response
-    response = HttpResponse(content_type='image/png')
-    img.save(response, 'PNG')
-    return response
