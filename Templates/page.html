@@ -1,3 +1,5 @@
+{% load custom_filters %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,12 +20,17 @@
   </head>
   <body>
     {% for ticket in tickets %}
-    <p>{{ticket.id}}</p>
-    <p>{{ticket.ticket_type}}</p>
-    <p>{{ticket.user}}</p>
-    <p>{{ticket.seat}}</p>
-    <p>{{ticket.event_name}}</p>
-    <p>{{ticket.purchased_at}}</p>
+    <p>Ticket ID: {{ ticket.id }}</p>
+    <p>Ticket Type: {{ ticket.ticket_type }}</p>
+    <p>Ticket User: {{ ticket.user }}</p>
+    <p>Your Seat: {{ ticket.seat }}</p>
+    <p>Your Events: {{ ticket.event_name }}</p>
+    <p>Purchased At: {{ ticket.purchased_at }}</p>
+
+    <img
+      src="data:image/png;base64,{{ qr_codes.forloop.counter0|get_qr_code_data|safe }}"
+      alt="QR Code"
+    />
     {% endfor %}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
