@@ -20,7 +20,6 @@ schema_view = swagger_get_schema_view(
 
 urlpatterns = [
     path('swagger/schema/', schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema"),
-    path('tickets/<int:ticket_id>/qr_code/', views.generate_qr_code, name='generate_qr_code'),
     path('ticket', UserTicketsView.as_view(), name='all_tickets'),
     path('events', EventListView.as_view(), name='all_events'),
 ]
