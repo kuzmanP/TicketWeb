@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slider</title>
+    <link rel="stylesheet" href="Slider.css">
+</head>
+<body style="height: 2000px;">
+	<header>
+		<div id="logo">Ticket<span id="logo-s">Vista</span></div>
+		<span class="sign"><a class="act" href="#">SIGN UP</a></span>
+		<span class="sign"><a href="/Sign_In.html">SIGN IN</a></span>
+	</header>
+	
+    <div class="slider">
+		<!-- fade css -->
+		<div class="myslide fade">
+			<div class="txt">
+				<h3>Welcome to</h3>
+        <h1>Ticket Vista</h1>
+				<p>Your best Ticketing App </p>
+        <a href="#"><button class="btn-get">GET STARTED</button></a>
+			</div>
+			<img src="./Slider-assets/img1.jpg" style="width: 100%; height: 100%;">
+		</div>
+		
+		<div class="myslide fade">
+			<div class="txt">
+				<h1>TICKET VISTA</h1>
+				<p style="gap: 5px;">You can sign into the app <br> 
+          from any mobile device to <br>
+          have access to all of your 
+          tickets
+        </p>
+        <a href="#"><button class="btn-get">GET STARTED</button></a>
+			</div>
+			<img src="./Slider-assets/img2.jpg" style="width: 100%; height: 100%;">
+		</div>
+		
+		<div class="myslide fade">
+			<div class="txt">
+				<h1>TICKET VISTA</h1>
+				<p style="gap: 1px;">Will change the way you buy and <br>
+          transfer tickets for parties, sporting events <br>
+          and even cinema occations.
+        </p>
+        <a href="#"><button class="btn-get">GET STARTED</button></a>
+			</div>
+			<img src="./Slider-assets/img3.jpg" style="width: 100%; height: 100%;">
+		</div>
+		
+		<!-- onclick js -->
+		<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  		<a class="next" onclick="plusSlides(1)">&#10095;</a>
+		
+		<div class="dotsbox" style="text-align:center">
+			<span class="dot" onclick="currentSlide(1)"></span>
+			<span class="dot" onclick="currentSlide(2)"></span>
+			<span class="dot" onclick="currentSlide(3)"></span>
+		</div>
+		<!-- /onclick js -->
+	</div>
+	
+<script src="./slider.js"></script>
+</body>
+</html>
+
+
